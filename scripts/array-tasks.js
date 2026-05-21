@@ -526,6 +526,22 @@ console.log('Найти первый товар, у которого цена п
 //   }
 // ]
 
-let combi1  = products.filter(product => product.inStock);
-products.map (product => product.discount >0);
-console.log('123',combi1); 
+const  combo1  = products
+.filter(product => product.inStock)
+.map(product => product.title);
+
+// filter + forEach:
+
+// Получить все товары дешевле 500, которые есть в наличии, и вывести их названия в консоль.
+
+const items = products.filter(product =>product.price <500 && product.inStock).forEach(product => console.log(product.title));
+
+// filter + map + find:
+
+// Получить все товары в наличии, преобразовать их к объектам { title, finalPrice }, затем найти первый товар дешевле 100.
+const availableItems = products.filter(product => product.inStock).map(product => ({
+title: product.title, 
+finalPrice: product.price - (product.price*product.discount)/100
+}))
+.find(product => product.finalPrice <100);
+console.log(availableItems);
